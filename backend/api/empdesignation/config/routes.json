@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/empdesignations",
+      "handler": "Empdesignation.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/empdesignations/count",
+      "handler": "Empdesignation.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/empdesignations/:id",
+      "handler": "Empdesignation.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/empdesignations",
+      "handler": "Empdesignation.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/empdesignations/:id",
+      "handler": "Empdesignation.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/empdesignations/:id",
+      "handler": "Empdesignation.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "connection": "default",
+  "collectionName": "keywords",
+  "info": {
+    "name": "keyword",
+    "description": "keyword details"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "keyword_name": {
+      "type": "string"
+    },
+    "designation_id": {
+      "collection": "empdesignation",
+      "via": "empdesignation_id",
+      "dominant": true
+    }
+  }
+}

@@ -1,0 +1,555 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: 'Crimson Text', serif;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.MuiSvgIcon-root {
+  margin: 0px;
+}
+
+.MuiTypography-h6 {
+  padding-bottom: 7px;
+}
+
+.heading {
+  text-align: center;
+  font-size: 26px;
+  font-family: 'Crimson Text', serif;
+}
+
+.MuiListItemIcon-root {
+  min-width: 40px;
+  padding-right: 40px;
+}
+
+.RaAppBar-toolbar-7 {
+  padding-right: 24px;
+  display: none;
+}
+
+#errorm {
+  color: red;
+  float: right;
+  text-align: right;
+  position: relative;
+  margin-right: -30px;
+}
+
+.adminpagetopheight {
+  margin-top: -60px;
+  margin-bottom: -90px;
+}
+
+.title{
+  font-family: 'Crimson Text', serif;
+}
+
+
+/*******************************************/
+/*Button Styling*/
+/*******************************************/
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 0px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  background-color: white;
+  border: none;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0927AF;
+  border-color: #007bff;
+}
+
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.feedbackbtn {
+  float: right;
+  margin-right: 15px;
+  font-size: 18px;
+  text-decoration: none;
+  font-family: 'Crimson Text', serif;
+  padding: 10px 20px 10px 20px;
+}
+
+.logoutbutton {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  padding: 8px 8px 8px 8px;
+  font-family: 'Crimson Text', serif;
+}
+
+.logouticon {
+  margin-left: 10px;
+  margin-right: 14px;
+}
+
+.ratingButton {
+  float: right;
+  margin: 25px 40px 10px 0px;
+}
+
+
+/*******************************************/
+/*DASHBOARD*/
+/*******************************************/
+.chartSection {
+  border: 2px solid rgb(153, 153, 153);
+  padding: 80px 50px 50px 50px;
+  margin-top: -50px;
+  height: max-content;
+  background-color: rgba(241, 252, 252,0.5);
+}
+
+.pieChart {
+  background-color: white;
+  text-align: center;
+  width: 450px;
+  height: 450px;
+  padding: 20px;
+  border: 1px solid rgb(153, 153, 153);
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px grey;
+  margin-top: 25px;
+}
+
+.barGraph {
+  background-color: white;
+  text-align: center;
+  width: 1000px;
+  height: 380px;
+  padding: 10px;
+  border: 1px solid rgb(153, 153, 153);
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px grey;
+  margin: 25px 0px 0px 50px;
+}
+
+.lineChart {
+  background-color: white;
+  margin-left: 50px;
+  width: 1000px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid rgb(153, 153, 153);
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px grey;
+}
+
+
+/*******************************************/
+/*APPBAR STYLING*/
+/*******************************************/
+.MuiAppBar-colorPrimary {
+  color: rgb(255, 255, 255);
+  height: 65px;
+  background-image: linear-gradient(to right, #98317D, rgba(0, 38, 175, 0.932));
+  text-decoration: none;
+}
+
+.topbarlogo {
+  width: 20px;
+}
+
+#appbarusername {
+  float: right;
+  font-style: inherit;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-family: 'Crimson Text', serif;
+}
+
+.MuiAppBar-positionStatic {
+  margin-top: -50px;
+}
+
+.small {
+  margin-right: -20px;
+  font-family: 'Crimson Text', serif;
+}
+
+.AccountCircle {
+  margin-bottom: 1px;
+  text-Decoration: none !important;
+}
+
+.title {
+  padding-top: 2px;
+  flex-grow: 1;
+  font-size: 20px;
+  font-family: 'Crimson Text', serif;
+}
+
+#appbarprofile {
+  color: black;
+  font-size: 18px;
+  font-family: 'Crimson Text', serif;
+}
+
+/*******************************************/
+/*PROFILE STYLING*/
+/*******************************************/
+.profileContainer {
+  padding: 0px 40px 0px 40px;
+  display: flex;
+  margin: -50px 50px -100px 0px;
+  text-align: center;
+  height: max-content;
+  min-height: 660px;
+  border-radius: 10px;
+  font-family: 'Crimson Text', serif;
+}
+
+.fullname {
+  float: left;
+  padding: 0px 0px 0px 0px;
+  font-size: 23px;
+  margin-left: 135px;
+}
+
+.profile {
+  float: left;
+  margin-top: 50px;
+  padding: 5px;
+  font-size: 20px;
+  font-family: 'Crimson Text', serif;
+  color: black;
+}
+
+.profilebtn{
+  margin: 450px 50px 0px -250px;
+}
+
+#fullname {
+  text-align: center;
+  padding: 10px 0px 50px 0px;
+}
+
+
+
+.profilepicture {
+  width: 250px;
+  border-radius: 50%;
+  border: 2px solid rgb(121, 121, 121);
+  padding: 5px;
+}
+
+.ProfileDetails {
+  width: 450px;
+  float: right;
+  padding: 0px 0px 0px 0px;
+  font-size: 18px;
+  text-align: start;
+  margin: 50px 0px 0px 100px;
+  color: black;
+  
+  
+}
+
+.detailsarea {
+  float: right;
+}
+
+.details {
+  padding: 15px;
+  border-bottom: 2px solid rgb(121, 121, 121);
+}
+
+
+/*******************************************/
+/*MENU STYLING*/
+/*******************************************/
+.menuicon {
+  color: black;
+  margin-left: -20px;
+  margin-right: 40px;
+  margin-bottom: -6px;
+}
+
+.submenu {
+  display: flex;
+  padding-right: 10px;
+}
+
+#submenulinks {
+  display: flex;
+  padding: 20px 40px 20px 20px;
+  font-family: 'Crimson Text', serif;
+  margin: -3px 17px -20px -5px;
+  font-size: 18px;
+  color: black;
+}
+
+#submenulinks:focus {
+  background: #98317D;
+  color: white;
+}
+
+.icon {
+  color: black;
+}
+
+.icon:focus{
+  color: white;
+}
+
+.menuheading {
+  padding: 15px;
+  color: black;
+}
+
+#tessss:active {
+  padding: 15px;
+  color: yellow;
+}
+
+.menubar {
+  min-height: 500px;
+}
+
+#Menuitems {
+  padding: 20px;
+  font-family: 'Crimson Text', serif;
+  margin: 5px 0px 5px 0px;
+  font-size: 18px;
+  color: black;
+}
+
+#Menuitems:focus {
+  background-color: #98317D;
+  color: white;
+}
+
+.drawer {
+  position: relative;
+}
+
+
+/*******************************************/
+/*FEEDBACK STYLING*/
+/*******************************************/
+.searchicon {
+  margin: 0px 0px 0px -50px;
+}
+
+.feedbackbox {
+  background-color: white;
+  min-width: 800px;
+  align-content: center;
+  margin-left: 150px;
+  box-shadow: 10px 10px 5px grey;
+  border-radius: 10px;
+  border: 2px solid rgb(153, 153, 153);
+  padding: 40px 40px 40px 40px;
+}
+
+.designation {
+  margin-right: 300px;
+  text-align: center;
+  font-size: 18px;
+  float: right;
+  font-family: 'Crimson Text', serif;
+}
+
+.username {
+  margin-bottom: 40px;
+  font-size: 18px;
+  margin-right: 155px;
+  font-family: 'Crimson Text', serif;
+}
+
+.usernamehead {
+  margin-bottom: 40px;
+  font-family: 'Crimson Text', serif;
+  font-size: 25px;
+  margin-right: 155px;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: -15px;
+}
+
+.feedbackhead {
+  float: right;
+  font-size: 25px;
+  margin-right: 15px;
+  text-decoration: none;
+  font-family: 'Crimson Text', serif;
+  padding: 5px;
+  margin-top: -15px;
+}
+
+/*******************************************/
+/*USER-FEEDBACK STYLING*/
+/*******************************************/
+.userfeedbackbox {
+  background-color: white;
+  align-content: center;
+  margin: 10px 0px 50px 150px;
+  border: 1px solid rgb(153, 153, 153);
+  min-height: 500px;
+  width: 800px;
+  border-radius: 10px;
+  padding: 50px 30px 100px 30px;
+  box-shadow: 10px 10px 5px grey;
+}
+
+.ratingalignment {
+  padding: 35px;
+  align-content: center;
+  font-size: 18px;
+  font-family: 'Crimson Text', serif;
+}
+
+/*******************************************/
+/* Star rating Css */
+/*******************************************/
+.starposition {
+  margin-top: 20px;
+  float: right;
+}
+
+.rate {
+  float: right;
+  height: 0px;
+  margin-top: -21px;
+}
+
+.rate:not(:checked)>input {
+  position: absolute;
+  top: -9999px;
+}
+
+.rate:not(:checked)>label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+  content: '★ ';
+}
+
+.rate>input:checked~label {
+  color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+  color: #deb217;
+}
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
+  color: #c59b08;
+}
+
+
+/*******************************************/
+/* Comments to Company */
+/*******************************************/
+.commentsSectionbox {
+  background-color: rgba(241, 252, 252,0.5);
+  border: 2px solid rgb(153, 153, 153);
+  padding: 50px 50px 50px 50px;
+  margin: -70px 0px -500px 0px;
+  display: flexbox;
+  height: max-content;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.commcard{
+  padding: 20px;
+  word-wrap: break-word;
+  box-shadow: 10px 10px 5px grey;
+  font-family: 'Crimson Text', serif;
+  margin: 20px 40px 20px 120px;
+  min-height: 150px;
+  width: 850px;
+  border-radius: 10px;
+  background-color: white;
+  position:relative;
+}
+.commentscard {
+  text-transform: capitalize;
+  font-size: 22px;
+  padding: 10px;
+}
+
+.commtocomp{
+  margin: 200px 0px 0px 65px;
+}
+
+.testfield{
+  width: 600px;
+}
+.commdate{
+  position:absolute;
+  bottom:0;
+  right:0;
+  padding: 15px;
+}
+
+p.commentscard:before{
+  content:'"';
+}
+
+p.commentscard:after {
+  content:' "';
+}
+
+.companyfdbkbtn{
+  margin-top: 50px;
+}
+
+.companyfeedbackbox {
+  background-color: white;
+  align-content: center;
+  margin: 10px 0px 50px 150px;
+  border: 1px solid rgb(153, 153, 153);
+  min-height: 500px;
+  width: 800px;
+  border-radius: 10px;
+  padding: 50px 30px 100px 30px;
+  box-shadow: 10px 10px 5px grey;
+}
+
+.ratingButton {
+  float: right;
+  margin: 25px 40px 10px 0px;
+}
+

@@ -1,0 +1,29 @@
+{
+  "connection": "default",
+  "collectionName": "opinions",
+  "info": {
+    "name": "opinion",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "user_id": {
+      "model": "user",
+      "plugin": "users-permissions"
+    },
+    "rater_id": {
+      "model": "user",
+      "plugin": "users-permissions"
+    },
+    "rating": {
+      "type": "json"
+    },
+    "comment": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "connection": "default",
+  "collectionName": "emp_designation",
+  "info": {
+    "name": "empdesignation",
+    "description": "employee designation table"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "designation": {
+      "type": "string"
+    },
+    "empdesignation_id": {
+      "collection": "keyword",
+      "via": "designation_id"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "host": "192.168.2.85",
+  "port": 1337,
+  "proxy": {
+    "enabled": false
+  },
+  "autoReload": {
+    "enabled": true
+  },
+  "cron": {
+    "enabled": false
+  },
+  "admin": {
+    "autoOpen": false
+  }
+}
