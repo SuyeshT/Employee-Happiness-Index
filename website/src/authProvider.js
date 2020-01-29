@@ -2,7 +2,6 @@ import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
 import { AUTH_GET_PERMISSIONS } from 'aor-permissions';
 import Cookies from 'js-cookie';
 import * as constant from './constant';
-
 export default (type, params) => {
   if (type === AUTH_LOGIN) {
     const { username, password } = params;

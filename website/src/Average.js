@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import { MDBCol, MDBCard, MDBCardBody, MDBRow } from 'mdbreact';
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Bar, Pie, Line } from 'react-chartjs-2';
 import decodeJwt from 'jwt-decode';
 import * as constant from './constant';
-
 export default class Average extends React.Component {
 
   componentDidMount() {
@@ -28,25 +29,24 @@ export default class Average extends React.Component {
           }
         }
       });
-     
       var today = new Date();
       var currentMonth;
       var minDate;
       var maxDate;
       if ((today.getMonth() + 1) < 10) {
         currentMonth = "0" + parseInt(today.getMonth() + 1);
-        minDate = today.getFullYear() + '-' + currentMonth + '-01' ;
+        minDate = today.getFullYear() + '-' + currentMonth + '-01';
       } else {
-        minDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-01' ;
+        minDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-01';
       }
       if ((today.getMonth() + 1) == 12) {
-        maxDate = (today.getFullYear() + 1) + '-01-01' ;
+        maxDate = (today.getFullYear() + 1) + '-01-01';
       } else {
-        maxDate = today.getFullYear() + '-' + (today.getMonth() + 2) + '-01' ;
+        maxDate = today.getFullYear() + '-' + (today.getMonth() + 2) + '-01';
       }
       var update_date = [];
       var avg = [];
-      var lastavg = [];
+      var monthObjectArray = [];
       let res_data = res.data;
       for (let a = 0; a < arr.length; a++) {
         let total = 0;
@@ -63,53 +63,71 @@ export default class Average extends React.Component {
         avg[a] = total / count;
         avg[a] = avg[a].toFixed(1);
       }
-      for (let a = 0; a < arr.length; a++) {
-        let totalline = 0;
-        let countline = 0;
-        for (let i = 0; i < res_data.length; i++) {
-          update_date[i] = res.data[i].updated_at;
-          if (res_data[i].rating[arr[a]] != null && res_data[i].rating[arr[a]] != undefined) {
-            if (update_date[i] >= minDate && update_date[i] < maxDate) {
-              totalline = totalline + JSON.parse(res.data[i].rating[arr[a]]);
-              countline = countline + 1;
-              
+      //this calculates average data according to keywords linewise amd then monthval variable finds final average of the data 
+      var resultArray = [monthAvg, null, null, null, null, null, null, null, null, null, null, null, null];
+      var monthArray = [];
+      for (var i = 0; i <= 12; i++) {
+        monthArray.push(new Date(new Date().getFullYear(), i, 1));
+      }
+      for (var dateCounter = 0; dateCounter < monthArray.length - 1; dateCounter++) {
+        var lastavg = [];
+        var currentMonth = monthArray[dateCounter].getMonth();
+        minDate = monthArray[dateCounter];
+        maxDate = monthArray[dateCounter + 1];
+        for (let a = 0; a < arr.length; a++) {
+          let totalline = 0;
+          let countline = 0;
+          for (let i = 0; i < res_data.length; i++) {
+            update_date[i] = res.data[i].updated_at;
+            if (res_data[i].rating[arr[a]] != null && res_data[i].rating[arr[a]] != undefined) {
+              if (new Date().getFullYear() == new Date(update_date[i]).getFullYear() && new Date(update_date[i]) >= minDate && new Date(update_date[i]) < maxDate) {
+                totalline = totalline + JSON.parse(res.data[i].rating[arr[a]]);
+                countline = countline + 1;
+              }
+            }
+            if (countline != 0) {
+              lastavg[a] = totalline / countline;
+            }
+          }
+          var monthAvg = 0;
+          if (lastavg.length != 0) {
+            var monthavg = 0;
+            if (lastavg.length != 0) {
+              for (var j = 0; j < lastavg.length; j++) {
+                monthavg += lastavg[j];
+              }
+            }
+            monthAvg = monthavg / lastavg.length;
+            monthAvg = monthAvg.toFixed(1);
+            var monthObject = {
+              id: decode.id,
+              monthaverage: monthAvg,
+              monthnumber: currentMonth + 1,
+              year: new Date().getFullYear(),
+            }
+            for (var i = 1; i <= 12; i++) {
+              if (monthObject.monthnumber == 1) {
+                resultArray[0] = monthObject.monthaverage;
+
+              }
+              if (monthObject.monthnumber == i) {
+                resultArray[i] = monthObject.monthaverage;
+
+              }
             }
           }
         }
-        lastavg[a] = totalline / countline;
-        
-      }
-     
-      var monthavg = 0;
-      if (lastavg.legth != 0) {
-        for (var j = 0; j < lastavg.length; j++) {
-          monthavg += lastavg[j];
-        }
-      }
-      var monthAvg = monthavg / lastavg.length;
-      monthAvg = monthAvg.toFixed(1);
-      var monthval = parseInt(minDate.slice(5, 8));
-      var montharray = [monthAvg, null, null, null, null, null, null, null, null, null, null, null, null];
-      
-      for (var i = 1; i <= 12; i++) {
-        if(monthval == 1){
-          montharray[0] = monthAvg; 
-        }
-        if (monthval == i) {
-          montharray[i] = monthAvg;
-        }
       }
       var labelarr = arr;
-       for(var k=0;k<labelarr.length;k++){
+      for (var k = 0; k < labelarr.length; k++) {
         labelarr[k] = labelarr[k].replace(/_/g, " ");
-       }
+      }
       localStorage.setItem("average", JSON.stringify(avg));
-      localStorage.setItem("lastAverage", JSON.stringify(montharray));
+      localStorage.setItem("lastAverage", JSON.stringify(resultArray));
       localStorage.setItem("arr", JSON.stringify(labelarr));
       this.setState({ opinions: res.data });
     });
   }
-
   render() {
     var retrievedData = localStorage.getItem("arr");
     var avg = localStorage.getItem("average");
@@ -117,7 +135,7 @@ export default class Average extends React.Component {
     var labelarray = JSON.parse(retrievedData);
     var averagedata = JSON.parse(avg);
     var lastavg2 = JSON.parse(lastavg);
-    var labelarray2 = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var labelarray2 = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const lineChartOptions = {
       responsive: true,
       scales: {
@@ -137,10 +155,10 @@ export default class Average extends React.Component {
       labels: labelarray2,
       datasets: [
         {
-          label: 'Monthwise average',
+          label: 'Progress',
           fill: true,
           lineTension: 0.1,
-          backgroundColor: 'rgba(75,192,192,0.9)',
+          backgroundColor: 'rgb(75,192,192)',
           borderColor: 'rgb(75,192,192)',
           borderCapStyle: 'butt',
           borderDash: [],

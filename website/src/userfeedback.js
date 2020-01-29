@@ -5,7 +5,6 @@ import axios from "axios";
 import decodeJwt from 'jwt-decode';
 import Popper from '@material-ui/core/Popper';
 import ReactModal from 'react-modal';
-
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -35,12 +34,12 @@ export default class Userfeedback extends React.Component {
 
       this.setState({ userdata: res.data });
     });
-    axios.get('http://192.168.2.87:1337/empdesignations?id=' + localStorage.getItem('userdesignationid')).then(res => {
+    axios.get(constant.empdesignationid + localStorage.getItem('userdesignationid')).then(res => {
 
       localStorage.setItem('empdesignation', res.data[0].designation);
       this.setState({ empdata: res.data });
     });
-    axios.get('http://192.168.2.87:1337/users?id=' + localStorage.getItem('loggeduserreportid')).then(res => {
+    axios.get(constant.UserAPI +'?id=' + localStorage.getItem('loggeduserreportid')).then(res => {
 
       localStorage.setItem('reportto', res.data[0].username);
       this.setState({ empdata: res.data });
@@ -53,13 +52,11 @@ export default class Userfeedback extends React.Component {
     var loggedusername = localStorage.getItem('username'); //logged in username
     var raterreportername = localStorage.getItem('Raterreportername'); //clicked rater reports to 
 
-
-
     if (Rater_Designation === empdes && raterUsername === loggedreportsto) { //same designation reports to
       this.keywordarray = [];
       localStorage.removeItem('keywordarray');
       // same designations and also reports to it
-      axios.get('http://192.168.2.87:1337/empdesignations?designation=Reporter').then(res => {
+      axios.get(constant.EmpdesignationsAPI + '?designation=Reporter').then(res => {
 
         for (var i = 0; i < res.data.length; i++) {
           for (var j = 0; j < res.data[i].empdesignation_id.length; j++) {
@@ -74,7 +71,7 @@ export default class Userfeedback extends React.Component {
       // same designation but does not reports to
       this.keywordarray = [];
       localStorage.removeItem('keywordarray');
-      axios.get('http://192.168.2.87:1337/empdesignations?designation=Employee').then(res => {
+      axios.get(constant.EmpdesignationsAPI + '?designation=Employee').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           for (var j = 0; j < res.data[i].empdesignation_id.length; j++) {
             this.keywordarray.push(res.data[i].empdesignation_id[j].keyword_name);
@@ -88,7 +85,7 @@ export default class Userfeedback extends React.Component {
       // different designation but reports to
       this.keywordarray = [];
       localStorage.removeItem('keywordarray');
-      axios.get('http://192.168.2.87:1337/empdesignations?designation=Reporter').then(res => {
+      axios.get(constant.EmpdesignationsAPI + '?designation=Reporter').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           for (var j = 0; j < res.data[i].empdesignation_id.length; j++) {
             this.keywordarray.push(res.data[i].empdesignation_id[j].keyword_name);
@@ -101,7 +98,7 @@ export default class Userfeedback extends React.Component {
       // same designation same team
       this.keywordarray = [];
       localStorage.removeItem('keywordarray');
-      axios.get('http://192.168.2.87:1337/empdesignations?designation=' + Rater_Designation).then(res => {
+      axios.get(constant.EmpdesignationsAPI + '?designation=' + Rater_Designation).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           for (var j = 0; j < res.data[i].empdesignation_id.length; j++) {
             this.keywordarray.push(res.data[i].empdesignation_id[j].keyword_name);
@@ -114,7 +111,7 @@ export default class Userfeedback extends React.Component {
       // diff designation same team
       this.keywordarray = [];
       localStorage.removeItem('keywordarray');
-      axios.get('http://192.168.2.87:1337/empdesignations?designation=' + Rater_Designation).then(res => {
+      axios.get(constant.EmpdesignationsAPI + '?designation=' + Rater_Designation).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           for (var j = 0; j < res.data[i].empdesignation_id.length; j++) {
             this.keywordarray.push(res.data[i].empdesignation_id[j].keyword_name);
@@ -127,7 +124,7 @@ export default class Userfeedback extends React.Component {
       this.keywordarray = [];
       // No relation so employee keywords
       localStorage.removeItem('keywordarray');
-      axios.get('http://192.168.2.87:1337/empdesignations?designation=Employee').then(res => {
+      axios.get(constant.EmpdesignationsAPI + '?designation=Employee').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           for (var j = 0; j < res.data[i].empdesignation_id.length; j++) {
             this.keywordarray.push(res.data[i].empdesignation_id[j].keyword_name);
@@ -169,7 +166,7 @@ export default class Userfeedback extends React.Component {
       "rating": this.rating,
     }
 
-    fetch('http://192.168.2.87:1337/opinions', {
+    fetch(constant.OpinionsAPI, {
       method: 'POST',
       headers: {
         'content-length': 492,

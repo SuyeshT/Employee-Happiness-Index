@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
+import * as constant from './constant';
 import CardHeader from '@material-ui/core/CardHeader';
 
 
@@ -11,7 +12,7 @@ export default class Feedback extends React.Component {
   componentDidMount() {
     var token = localStorage.getItem("user_id");
 
-    axios.get('http://192.168.2.87:1337/opinions?user_id=' + token + '/').then(res => {
+    axios.get(constant.OpinionsAPI + '?user_id=' + token + '/').then(res => {
       var today = new Date();
       var currentMonth;
       var minDate;

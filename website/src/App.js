@@ -22,6 +22,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Feedbacktocompany from './Feedbacktocompany';
 import View from './View';
 import Topemplist from './Topemplist';
+import * as constant from './constant';
 const newHistory = createHistory();
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -47,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }));
 function App() {
   const classes = useStyles();
-  const apiUrl = 'http://192.168.2.87:1337';
+  const apiUrl = constant.API;
   const dataProvider = simpleRestProvider(apiUrl, httpClient);
   const App = () => (<div className='main'>
     <main className={classes.content}>

@@ -205,8 +205,8 @@ const Menu = ({ onMenuClick, logout }) => {
           {permissions === 'Public' &&
             <div className={'submenu'}>
               <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2a-content" id='tessss' id="panel2a-header"  >
-                  <Typography className='menuheading'><RateReviewOutlinedIcon className={'menuicon'} />Feedback</Typography>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2a-content" id="panel2a-header"  >
+                  <Typography id={'menuheading'}><RateReviewOutlinedIcon className={'menuicon'} />Feedback</Typography>
                 </ExpansionPanelSummary>
                 <Divider />
                 <ExpansionPanelDetails>

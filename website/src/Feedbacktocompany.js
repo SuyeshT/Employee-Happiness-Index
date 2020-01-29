@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import axios from "axios";
 import StarRatingComponent from 'react-star-rating-component';
 import CardHeader from '@material-ui/core/CardHeader';
+import * as constant from './constant';
 
 export class Feedbacktocompany extends Component {
   rating = {};
@@ -23,7 +24,7 @@ export class Feedbacktocompany extends Component {
     };
   }
   componentDidMount() {
-    axios.get('http://192.168.2.87:1337/empdesignations?designation=company').then(res => {
+    axios.get(constant.API + '/empdesignations?designation=company').then(res => {
 
       for (var i = 0; i < res.data.length; i++) {
         for (var j = 0; j < res.data[i].empdesignation_id.length; j++) {
@@ -51,7 +52,7 @@ export class Feedbacktocompany extends Component {
       "user_id": user_id
     }
     if (com !== "" && Object.keys(this.rating).length === this.keywordarray.length) {
-      fetch('http://192.168.2.87:1337/opiniontocompanies', {
+      fetch(constant.API + '/opiniontocompanies', {
         method: 'POST',
         headers: {
           'content-length': 492,
@@ -88,7 +89,7 @@ export class Feedbacktocompany extends Component {
     return (
       <div >
         <div className='chartSection'>
-          <center><p className='heading'> Below Feedback/Suggestion is for Company.</p></center>
+          <center><CardHeader style={{ marginTop: '-50px' }} title={'Below Feedback/Suggestion is for Company.'} /></center>
           <div className='companyfeedbackbox'>
             <form onSubmit={this.handleSubmitRating}>
               {this.keywordarray.map(Keywordata =>
@@ -108,13 +109,12 @@ export class Feedbacktocompany extends Component {
                   id="filled-textarea"
                   className='testfield'
                   label="Comments/Suggestion"
-                  placeholder="Give Comments to Company!"
+                  placeholder="Note: This rating will be saved as Anonymous."
                   multiline
                   variant="outlined"
                   value={this.state.value}
                   onChange={this.onChange.bind(this)}
                 />
-                <p>Note: This rating will be saved as Anonymous.</p>
               </div>
               <div className='companyfdbkbtn'>
                 <p id="errorm">{button}</p>

@@ -10,7 +10,6 @@ const styles = theme =>({
         height: 80,
         margin: theme.spacing(1),
         Color: theme.palette.secondary.main,
-
     },
     icon: {
         backgroundColor: theme.palette.secondary.main,
