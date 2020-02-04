@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/opinions": {
+    "/opiniontocompanies": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Opinion"
+                    "$ref": "#/components/schemas/Opiniontocompany"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Opinion"
+          "Opiniontocompany"
         ],
         "parameters": [
           {
@@ -195,7 +195,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Opinion"
+                  "$ref": "#/components/schemas/Opiniontocompany"
                 }
               }
             }
@@ -233,7 +233,7 @@
         },
         "summary": "",
         "tags": [
-          "Opinion"
+          "Opiniontocompany"
         ],
         "requestBody": {
           "description": "",
@@ -241,14 +241,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewOpinion"
+                "$ref": "#/components/schemas/NewOpiniontocompany"
               }
             }
           }
         }
       }
     },
-    "/opinions/count": {
+    "/opiniontocompanies/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -300,12 +300,12 @@
         },
         "summary": "",
         "tags": [
-          "Opinion"
+          "Opiniontocompany"
         ],
         "parameters": []
       }
     },
-    "/opinions/{id}": {
+    "/opiniontocompanies/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -315,7 +315,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Opinion"
+                  "$ref": "#/components/schemas/Opiniontocompany"
                 }
               }
             }
@@ -353,7 +353,7 @@
         },
         "summary": "",
         "tags": [
-          "Opinion"
+          "Opiniontocompany"
         ],
         "parameters": [
           {
@@ -377,7 +377,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Opinion"
+                  "$ref": "#/components/schemas/Opiniontocompany"
                 }
               }
             }
@@ -415,7 +415,7 @@
         },
         "summary": "",
         "tags": [
-          "Opinion"
+          "Opiniontocompany"
         ],
         "requestBody": {
           "description": "",
@@ -423,7 +423,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewOpinion"
+                "$ref": "#/components/schemas/NewOpiniontocompany"
               }
             }
           }
@@ -489,7 +489,7 @@
         },
         "summary": "",
         "tags": [
-          "Opinion"
+          "Opiniontocompany"
         ],
         "parameters": [
           {
@@ -508,7 +508,7 @@
   },
   "components": {
     "schemas": {
-      "Opinion": {
+      "Opiniontocompany": {
         "required": [
           "id"
         ],
@@ -516,6 +516,12 @@
           "id": {
             "type": "string"
           },
+          "ratingtocompany": {
+            "type": "json"
+          },
+          "commenttocompany": {
+            "type": "string"
+          },
           "user_id": {
             "required": [
               "id",
@@ -569,81 +575,18 @@
                 "type": "string"
               }
             }
-          },
-          "rater_id": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "dateOfBirth": {
-                "type": "string"
-              },
-              "joiningDate": {
-                "type": "string"
-              },
-              "fullName": {
-                "type": "string"
-              },
-              "empdesignation": {
-                "type": "string"
-              },
-              "reporter_name": {
-                "type": "string"
-              },
-              "avatar": {
-                "type": "string"
-              }
-            }
-          },
-          "rating": {
-            "type": "json"
-          },
-          "comment": {
-            "type": "string"
           }
         }
       },
-      "NewOpinion": {
+      "NewOpiniontocompany": {
         "properties": {
-          "user_id": {
-            "type": "string"
-          },
-          "rater_id": {
-            "type": "string"
-          },
-          "rating": {
+          "ratingtocompany": {
             "type": "json"
           },
-          "comment": {
+          "commenttocompany": {
+            "type": "string"
+          },
+          "user_id": {
             "type": "string"
           }
         }
@@ -652,7 +595,7 @@
   },
   "tags": [
     {
-      "name": "Opinion"
+      "name": "Opiniontocompany"
     }
   ]
 }

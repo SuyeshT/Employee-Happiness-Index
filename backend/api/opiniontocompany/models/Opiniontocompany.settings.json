@@ -1,0 +1,25 @@
+{
+  "connection": "default",
+  "collectionName": "opiniontocompanies",
+  "info": {
+    "name": "opiniontocompany",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "ratingtocompany": {
+      "type": "json"
+    },
+    "commenttocompany": {
+      "type": "text"
+    },
+    "user_id": {
+      "model": "user",
+      "plugin": "users-permissions"
+    }
+  }
+}

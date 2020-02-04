@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/opiniontocompanies",
+      "handler": "Opiniontocompany.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/opiniontocompanies/count",
+      "handler": "Opiniontocompany.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/opiniontocompanies/:id",
+      "handler": "Opiniontocompany.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/opiniontocompanies",
+      "handler": "Opiniontocompany.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/opiniontocompanies/:id",
+      "handler": "Opiniontocompany.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/opiniontocompanies/:id",
+      "handler": "Opiniontocompany.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
