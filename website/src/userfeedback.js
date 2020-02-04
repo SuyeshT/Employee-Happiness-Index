@@ -25,15 +25,16 @@ export default class Userfeedback extends React.Component {
       rating: 0,
       empdata: [],
       postRating: [],
-      iserrormessage: false,
+      // iserrormessage: false,
       showModal: false,
+      open: false,
     };
   }
   componentDidMount() {
     axios.get(constant.Keywordsort).then(res => {
-
       this.setState({ userdata: res.data });
     });
+    // "http://192.168.2.87:1337/empdesignations?id="
     axios.get(constant.empdesignationid + localStorage.getItem('userdesignationid')).then(res => {
 
       localStorage.setItem('empdesignation', res.data[0].designation);
@@ -145,14 +146,16 @@ export default class Userfeedback extends React.Component {
     if (Object.keys(this.rating).length === this.keywordarray.length) {
       this.setState({ showModal: true });
     } else {
-      this.setState({ iserrormessage: true });
+      this.setState({open:true});
+      // this.setState({ iserrormessage: true });
       this.setState({ showModal: false });
     }
   };
 
   handleClose = () => {
+    this.setState({open:false});
     this.setState({ showModal: false });
-    this.setState({ iserrormessage: false });
+    // this.setState({ iserrormessage: false });
   };
 
   handleSubmitRating = event => {
@@ -181,7 +184,8 @@ export default class Userfeedback extends React.Component {
       else {
         console.log('failed');
       }
-      window.location.replace("/Feedback")
+      window.location.replace("/Feedback").reload();
+      // window.location.reload();   
     })
       .catch(error => {
         console.log("failure", error);
@@ -189,11 +193,11 @@ export default class Userfeedback extends React.Component {
   }
   render() {
     var empUsername = localStorage.getItem('RaterfullName') //selected user
-    const iserrormessage = this.state.iserrormessage;
-    let errormsg;
-    if (iserrormessage === true) {
-      errormsg = 'Please give rating to all the keywords';
-    }
+    // const iserrormessage = this.state.iserrormessage;
+    // let errormsg;
+    // if (iserrormessage === true) {
+    //   errormsg = 'Please give rating to all the keywords';
+    // }
     const { name } = this.state;
     return (
       <div className='chartSection'>
@@ -214,9 +218,17 @@ export default class Userfeedback extends React.Component {
               </div>)}
             <div>
               <button className="btn-primary btn ratingButton" onClick={this.handleClickOpen}> Submit </button>
-              <Dialog open={this.state.showModal} onClose={this.handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description"  >
-                <DialogContent style={{ fontSize: 18 }}> You won't be able to edit this. </DialogContent>
-                <DialogContent style={{ fontSize: 18 }}> Do you want to submit ? </DialogContent>
+              <Dialog open={this.state.open} onClose={this.handleClose}>
+          <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+            <p className="dialog-msg">Please give rating to all the keywords.</p>
+          </DialogTitle>
+          <Button autoFocus onClick={this.handleClose} color="primary">
+              Okay
+            </Button>
+        </Dialog>
+              <Dialog open={this.state.showModal} onClose={this.handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+                <DialogContent style={{ fontSize: 18, fontFamily: 'Crimson Text' }}> You won't be able to edit this. </DialogContent>
+                <DialogContent style={{ fontSize: 18, fontFamily: 'Crimson Text' }}> Do you want to submit ? </DialogContent>
                 <DialogContent>  </DialogContent>
                 <DialogActions>
                   <div> <Button onClick={this.handleClose} color="primary"> No </Button></div>
@@ -225,7 +237,7 @@ export default class Userfeedback extends React.Component {
               </Dialog>
             </div>
             <a className='btn-danger btn ratingButton' href="/Feedback">Cancel</a>
-            <p id="errorm">{errormsg}</p>
+            {/* <p id="uferrorm">{errormsg}</p> */}
           </form>
         </div>
       </div>

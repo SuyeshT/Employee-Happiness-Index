@@ -53,7 +53,7 @@ function App() {
   const App = () => (<div className='main'>
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      <Admin layout={MyLayout} customroutes={customRoutes} history={newHistory} loginPage={MyLoginPage} logout={MyLogoutButton} catchAll={NotFound} dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
+      <Admin layout={MyLayout} customroutes={customRoutes} history={newHistory} loginPage={MyLoginPage} logout={MyLogoutButton} catchAll={NotFound} authProvider={authProvider} dataProvider={dataProvider}>
         <Resource name="keywords" list={KeywordList} edit={KeywordEdit} create={KeywordCreate} />
         <Resource name="Empdesignations" list={EmpdesignationList} edit={EmpdesignationEdit} create={EmpdesignationCreate} />
         <Resource name="users" list={UserList} edit={UserEdit} create={UserCreate} />
@@ -63,6 +63,7 @@ function App() {
         <Resource name="userinfo" list={Empinfo} />
         <Resource name="Feedbacktocompany" list={Feedbacktocompany} />
         <Resource name ="View" list={View} />
+        <Resource name ="Dashboard" list={Dashboard} />
         <Resource name ="Topemplist" list={Topemplist} />
       </Admin>
     </main>

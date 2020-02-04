@@ -7,12 +7,7 @@ import axios, { post } from 'axios';
 import decodeJwt from 'jwt-decode';
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
 import * as constant from './constant';
 import Fade from "@material-ui/core/Fade";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -20,16 +15,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // display: "flex",
-    // flexDirection: "column",
-    // alignItems: "center"
   },
   button: {
     margin: theme.spacing(2)
   },
   placeholder: {
     height: 10,
-    width: 180 
+    width: 180
   }
 }));
 
@@ -53,8 +45,8 @@ const Profile = ({ userId }) => {
     },
     []
   );
-  function handleClickLoading  ()  {
-    
+  function handleClickLoading() {
+
     setLooading(prevLoading => !prevLoading);
 
     var username = user.email;
@@ -69,10 +61,12 @@ const Profile = ({ userId }) => {
         }
         // Handle success.
         setOpen(true);
+        setLooading(false);
         console.log('Your user received an email');
       })
       .catch(error => {
         setOopen(true);
+        setLooading(false);
         // Handle error.
         console.log('An error occurred:', error);
       });
@@ -81,9 +75,10 @@ const Profile = ({ userId }) => {
   useEffect(() => {
     dataProvider.getOne('users', { id: ID })
       .then(({ data }) => {
-        localStorage.setItem('reportto', data.reporter_name.username);
-
+        // localStorage.setItem('reportto', data.reporter_name.username);
+        console.log('image', data);
         setUser(data);
+
         setLoading(false);
       })
       .catch(error => {
@@ -95,6 +90,10 @@ const Profile = ({ userId }) => {
   if (error) return <Error />;
   if (!user) return null;
 
+  var profilesimage = localStorage.getItem('imgurl');
+  var profileimg = 'http://192.168.2.87:1337' + profilesimage;
+  var defalutimg = { logo };
+
   function datesFunction(d) {
     var date = new Date(d)
     var dd = date.getDate() - 1;
@@ -105,50 +104,9 @@ const Profile = ({ userId }) => {
     return d = dd + '/' + mm + '/' + yyyy
   }
 
-  // function handleClickOpen() {
-  //   var username = user.email;
-  //   console.log("user", "clicked", username);
-  //   axios.post(constant.API + '/auth/forgot-password', {
-  //     email: username,
-  //     url: constant.API + '/admin/plugins/users-permissions/auth/reset-password',
-  //   })
-  //     .then(response => {
-  //       if (response.status === 429) {
-  //         console.log("Code has been sent to your email");
-  //       }
-  //       // Handle success.
-  //       setOpen(true);
-  //       console.log('Your user received an email');
-  //     })
-  //     .catch(error => {
-       
-  //       // Handle error.
-  //       console.log('An error occurred:', error);
-  //     });
-  // };
-
-  // function handlenewpassword() {
-  //   alert("submit");
-  //   axios
-  //     .post(constant.API + '/auth/reset-password', {
-  //       code: '004a0f1f3f4d7bdbb843431fbc49fdc0362bd0718e4f17147f0ce75f92b0dcd260b59b7c228d39e142303e3946ac29ac58dd0b80ad3cdb09e675f83479fc63c4',
-  //       password: 'jayant',
-  //       passwordConfirmation: 'jayant'
-  //     })
-  //     .then(response => {
-  //       // Handle success.
-  //       console.log('Your user\'s password has been changed.');
-  //     })
-  //     .catch(error => {
-  //       // Handle error.
-  //       console.log('An error occurred:', error);
-  //     });
-  // }
-
   const handleClose = () => {
     setOpen(false);
     setOopen(false);
-    setLooading(prevLoading => !prevLoading);
   };
 
 
@@ -167,6 +125,7 @@ const Profile = ({ userId }) => {
       'type': imgFile.type,
       'webkitRelativePath': imgFile.webkitRelativePath
     }
+    // console.log('read filesdata : ', fileData);
     var bodydata = {
       "files": fileData,
       "path": "/public/upload",
@@ -180,14 +139,14 @@ const Profile = ({ userId }) => {
     fetch(constant.API + '/upload', {
       method: 'POST',
       headers: {
-        'Access-Control-Allow-Headers': 'http://localhost:3000',
+        'Access-Control-Allow-Headers': '*',
         'Content-Type': 'application/x-www-form-urlencoded',
         "JWT": JSON.stringify(token),
         'mimeType': 'multipart/form-data',
         "cors": {
-          "origin": [ '*' ],
+          "origin": ['*'],
           "headers": ['Authorization', 'Content-Type', 'If-None-Match']
-      }
+        }
       },
       body: JSON.stringify(bodydata)
     }).then(response => {
@@ -208,18 +167,12 @@ const Profile = ({ userId }) => {
     imgFile = imageFile.target.files[0];
     localStorage.setItem('profileimage', imgFile);
   }
-  function handlepasswordchange(useremail) {
-
-    console.log("mayank", useremail);
-
-  }
-
   return (
     <Grid fluid>
       <div className={'chartSection'}>
         <Grid className={"profileContainer"} >
           <div className={"profile"}>
-            <img alt="Remy Sharp" src={logo} className={'profilepicture'} />
+            <img alt="Profile Image" src={'http://192.168.2.87:1337' + user.avatar.url} className={'profilepicture'} />
             <p id='fullname' style={{ textTransform: 'capitalize' }}> {user.fullName}</p>
           </div>
           <form className='profilebtn' onSubmit={handleSubmitRating}>
@@ -227,54 +180,40 @@ const Profile = ({ userId }) => {
             <input type="submit" className={'btn btn-primary profilebutton'} value="Submit" />
           </form>
           <div id="forgotpassword">
-          <div className={classes.root}>
-      <div className={classes.placeholder}>
-        <Fade
-            in={looading}
-            style={{
-              transitionDelay: looading ? "800ms" : "0ms"
-            }}
-            unmountOnExit
-        >
-          <CircularProgress />
-        </Fade>
-      </div>
-      <div id="loading">
-      {looading ? <p></p> :<Button style={{ fontSize: 15,fontFamily: 'Crimson Text', textTransform: 'capitalize', backgroundColor: "#0927AF", color: "white" }} variant="standard" color="primary"onClick={handleClickLoading} className={classes.button}>
-       Change Password
-            </Button> }
+            <div className={classes.root}>
+              <div className={classes.placeholder}>
+                <Fade
+                  in={looading}
+                  style={{
+                    transitionDelay: looading ? "800ms" : "0ms"
+                  }}
+                  unmountOnExit
+                >
+                  <CircularProgress />
+                </Fade>
+              </div>
+              <div id="loading">
+                {looading ? <p></p> : <a id="changepassword" style={{ fontSize: 15, fontFamily: 'Crimson Text', textTransform: 'capitalize', backgroundColor: "", color: "black" }} variant="standard" color="primary" onClick={handleClickLoading} className={classes.button}>
+                  Change password
+        </a>}
+              </div>
+              <Dialog open={open} onClose={handleClose}>
+                <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+                  <p className="dialog-msg"> We just send you an email message. Inside that message is a link you can use to change your password.</p>
+                </DialogTitle>
+                <Button autoFocus onClick={handleClose} color="primary">
+                  Okay
+            </Button>
+              </Dialog>
+              <Dialog open={oopen} onClose={handleClose} >
+                <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+                  <p className="dialog-msg"> Something went wrong please try again after some time.</p>
+                </DialogTitle>
+                <Button autoFocus onClick={handleClose} color="primary">
+                  Okay
+          </Button>
+              </Dialog>
             </div>
-            <Dialog open={open} onClose={handleClose}
-            >
-              <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-                You have received an Change password link on your registered mail-id.
-              </DialogTitle>
-              <Button autoFocus onClick={handleClose} color="primary">
-                  Okay.!
-                </Button>
-            </Dialog>
-            <Dialog open={oopen} onClose={handleClose}
-            >
-              <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-                Something went wrong please try again after few minutes.
-              </DialogTitle>
-              <Button autoFocus onClick={handleClose} color="primary">
-                  Okay.!
-                </Button>
-            </Dialog>
-      </div>
-            {/* <Button style={{ fontSize: 15,fontFamily: 'Crimson Text', textTransform: 'capitalize', backgroundColor: "#0927AF", color: "white" }} variant="standard" color="primary" onClick={handleClickOpen}>
-              Change Password 
-            </Button> <CircularProgress open={open}/>
-            <Dialog open={open} onClose={handleClose}
-            >
-              <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-                You have received an Change password link on your registered mail-id.
-              </DialogTitle>
-              <Button autoFocus onClick={handleClose} color="primary">
-                  Okay.!
-                </Button>
-            </Dialog> */}
           </div>
           <div className={'ProfileDetails'} >
             <p className={'details'}><b>Username:</b><p className={'detailsarea'}>{user.username}</p></p>

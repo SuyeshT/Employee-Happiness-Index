@@ -4,6 +4,11 @@ import axios from "axios";
 import StarRatingComponent from 'react-star-rating-component';
 import CardHeader from '@material-ui/core/CardHeader';
 import * as constant from './constant';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 export class Feedbacktocompany extends Component {
   rating = {};
@@ -20,9 +25,11 @@ export class Feedbacktocompany extends Component {
       empdata: [],
       comments: "",
       postRating: [],
-      iserrormessage: false,
+      showModal: false,
+      open: false,
     };
   }
+  
   componentDidMount() {
     axios.get(constant.API + '/empdesignations?designation=company').then(res => {
 
@@ -39,6 +46,21 @@ export class Feedbacktocompany extends Component {
     this.rating[name] = nextValue;
     JSON.stringify(this.rating);
   }
+  handleClickOpen = (e) => {
+    e.preventDefault();
+    if (Object.keys(this.rating).length === this.keywordarray.length) {
+      this.setState({ showModal: true });
+    } else {
+      this.setState({open:true});
+      this.setState({ iserrormessage: true });
+      this.setState({ showModal: false });
+    }
+  };
+  handleClose = () => {
+    this.setState({open:false});
+    this.setState({ showModal: false });
+    this.setState({ iserrormessage: false });
+  };
   onChange = event => {
     this.setState({ value: event.target.value });
   }
@@ -51,7 +73,7 @@ export class Feedbacktocompany extends Component {
       "commenttocompany": com,
       "user_id": user_id
     }
-    if (com !== "" && Object.keys(this.rating).length === this.keywordarray.length) {
+      this.setState({ showModal: true });
       fetch(constant.API + '/opiniontocompanies', {
         method: 'POST',
         headers: {
@@ -73,25 +95,22 @@ export class Feedbacktocompany extends Component {
         .catch(error => {
           console.log("failure", error);
         })
-    }
-    else {
-      this.setState({ iserrormessage: true });
-    }
+  
   }
 
   render() {
     const { name } = this.state;
-    const iserrormessage = this.state.iserrormessage;
-    let button;
-    if (iserrormessage == true) {
-      button = 'Please give rating to all the keywords and enter comment';
-    }
+    // const iserrormessage = this.state.iserrormessage;
+    // let button;
+    // if (iserrormessage == true) {
+    //   button = 'Please give rating to all the keywords and enter comment';
+    // }
     return (
       <div >
         <div className='chartSection'>
-          <center><CardHeader style={{ marginTop: '-50px' }} title={'Below Feedback/Suggestion is for Company.'} /></center>
+        <center><p className='heading'>Below Feedback/Suggestion is for Company.</p></center>
           <div className='companyfeedbackbox'>
-            <form onSubmit={this.handleSubmitRating}>
+            <form>
               {this.keywordarray.map(Keywordata =>
                 <div className='ratingalignment'>
                   {Keywordata.replace(/_/g, " ")}
@@ -109,18 +128,35 @@ export class Feedbacktocompany extends Component {
                   id="filled-textarea"
                   className='testfield'
                   label="Comments/Suggestion"
-                  placeholder="Note: This rating will be saved as Anonymous."
                   multiline
                   variant="outlined"
                   value={this.state.value}
                   onChange={this.onChange.bind(this)}
                 />
+                <p>Note: This rating will be saved as Anonymous.</p>
               </div>
               <div className='companyfdbkbtn'>
-                <p id="errorm">{button}</p>
+                {/* <p id="errorm">{button}</p> */}
                 <br></br>
-                <button type='sumbit' className='btn-primary btn ratingButton'>Submit</button>
+                <button type='sumbit' className='btn-primary btn ratingButton' onClick={this.handleClickOpen} >Submit</button>
                 <a type='submit' className='btn-danger btn ratingButton' href="/Feedback">Cancel</a>
+                <Dialog open={this.state.open} onClose={this.handleClose}>
+          <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+            <p className="dialog-msg">Please give rating to all the keywords.</p>
+          </DialogTitle>
+          <Button autoFocus onClick={this.handleClose} color="primary">
+              Okay
+            </Button>
+        </Dialog>
+                <Dialog open={this.state.showModal} onClose={this.handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description"  >
+                <DialogContent style={{ fontSize: 18, fontFamily: 'Crimson Text' }}> You won't be able to edit this. </DialogContent>
+                <DialogContent style={{ fontSize: 18, fontFamily: 'Crimson Text' }}> Do you want to submit ? </DialogContent>
+                <DialogContent>  </DialogContent>
+                <DialogActions>
+                  <div> <Button onClick={this.handleClose} color="primary"> No </Button></div>
+                  <div> <Button onClick={this.handleSubmitRating} color="primary" autoFocus> Yes </Button></div>
+                </DialogActions>
+              </Dialog>
               </div>
             </form>
           </div>

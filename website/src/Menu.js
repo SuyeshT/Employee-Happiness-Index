@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import { useDataProvider} from 'react-admin';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -32,6 +34,11 @@ const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    color: 'black',
+    '&:hover': {
+      backgroundColor: '#eaeaea !important',
+      color: 'black',
+    }
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -78,6 +85,10 @@ const useStyles = makeStyles(theme => ({
       width: theme.spacing(9) + 1,
     },
   },
+  active: {
+    color: 'white',
+    backgroundColor: '#98317D',
+  },
   toolbar: {
     display: 'flex',
     alignItems: 'center',
@@ -119,7 +130,19 @@ const Menu = ({ onMenuClick, logout }) => {
   };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const menuopen = Boolean(anchorEl);
-
+  var empid = localStorage.getItem('userdesignationid');
+  const [user, setUser] = useState();
+  const [error, setError] = useState();
+  const dataProvider = useDataProvider();
+  useEffect(() => {
+    dataProvider.getOne('empdesignations', { id: empid })
+      .then(({ data }) => {
+        setUser(data.designation);
+      })
+      .catch(error => {
+        setError(error);
+      })
+  }, []);
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -141,7 +164,7 @@ const Menu = ({ onMenuClick, logout }) => {
           >
             <MenuIcon />
           </IconButton>
-          {permissions === 'Public' && <div variant="h6" className='title'> Employee Happpiness Index<p id='appbarusername' style={{ textTransform: 'capitalize' }}>{username}</p></div>}
+          {permissions === 'Authenticated' && <div variant="h6" className='title'> Employee Happpiness Index<p id='appbarusername' style={{ textTransform: 'capitalize' }}>{username}</p></div>}
           {permissions === 'Administrator' && <div variant="h6" className='title'>Employee Happpiness Index<p id='appbarusername'>Hello Admin</p></div>}
           <div>
             <IconButton
@@ -169,7 +192,7 @@ const Menu = ({ onMenuClick, logout }) => {
               onClose={handleClose}
             >
               <div >
-                {permissions === 'Public' && <MenuItemLink to="/Profile" id='appbarprofile' leftIcon={<Avatar alt="Remy Sharp" src={logo} className={'small'} />} primaryText="Profile" />}
+                {permissions === 'Authenticated' && <MenuItemLink to="/Profile" id='appbarprofile' onClick={handleClose} leftIcon={<Avatar alt="Remy Sharp" src={logo} className={'small'} />} primaryText="Profile" />}
               </div>
               <MyLogoutButton className='logout' />
             </Menubar>
@@ -196,25 +219,25 @@ const Menu = ({ onMenuClick, logout }) => {
         </div>
         <Divider />
         <div >
-          {permissions === 'Administrator' && <MenuItemLink id='Menuitems' to="/Topemplist" primaryText="Top Employees" leftIcon={<PeopleAltOutlinedIcon className={'icon'} />} onClick={onMenuClick} />}<Divider />
-          {permissions === 'Administrator' && <MenuItemLink id='Menuitems' to="/View" primaryText="Suggestions" leftIcon={<AddCommentOutlinedIcon className={'icon'} />} onClick={onMenuClick} />}<Divider />
-          {permissions === 'Administrator' && <MenuItemLink id='Menuitems' to='/Keywords' primaryText="Keywords" leftIcon={<FormatListBulletedIcon className={'icon'} />} onClick={onMenuClick} />}<Divider />
-          {permissions === 'Administrator' && <MenuItemLink id='Menuitems' to="/Empdesignations" primaryText="Designations" leftIcon={<WorkOutlineOutlinedIcon className={'icon'} />} onClick={onMenuClick} />}<Divider />
-          {permissions === 'Administrator' && <MenuItemLink id='Menuitems' to="/Users" primaryText="Employees" leftIcon={<PeopleAltOutlinedIcon className={'icon'} />} onClick={onMenuClick} />}<Divider />
-          {permissions === 'Public' && <MenuItemLink id='Menuitems' to="/#" primaryText="Dashboard" leftIcon={<DashboardOutlinedIcon className={'icon'} />} onClick={onMenuClick} />}<Divider />
-          {permissions === 'Public' &&
+          {permissions === 'Authenticated' && <p><MenuItemLink className={classes.root} activeClassName={classes.active} id='Menuitems' to="/dashboard" primaryText="Dashboard" leftIcon={<DashboardOutlinedIcon className={'icon'} />} onClick={onMenuClick} /><Divider /></p>}
+          {user === 'CEO/CTO' && <p><MenuItemLink className={classes.root} activeClassName={classes.active} id='Menuitems' to="/Topemplist" primaryText="Top Employees" leftIcon={<PeopleAltOutlinedIcon className={'icon'} />} onClick={onMenuClick} /><Divider /></p>}
+          {user === 'CEO/CTO' && <p><MenuItemLink className={classes.root} activeClassName={classes.active} id='Menuitems' to="/View" primaryText="Suggestions" leftIcon={<AddCommentOutlinedIcon className={'icon'} />} onClick={onMenuClick} /><Divider /></p>}
+          {permissions === 'Administrator' && <p><MenuItemLink className={classes.root} activeClassName={classes.active} id='Menuitems' to="/Users" primaryText="Employees" leftIcon={<PeopleAltOutlinedIcon className={'icon'} />} onClick={onMenuClick} /><Divider /></p>}
+          {permissions === 'Administrator' && <p><MenuItemLink className={classes.root} activeClassName={classes.active} id='Menuitems' to='/Keywords' primaryText="Keywords" leftIcon={<FormatListBulletedIcon className={'icon'} />} onClick={onMenuClick} /><Divider /></p>}
+          {permissions === 'Administrator' && <p><MenuItemLink className={classes.root} activeClassName={classes.active} id='Menuitems' to="/Empdesignations" primaryText="Designations" leftIcon={<WorkOutlineOutlinedIcon className={'icon'} />} onClick={onMenuClick} /><Divider /></p>}
+          {permissions === 'Authenticated' &&
             <div className={'submenu'}>
               <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2a-content" id="panel2a-header"  >
-                  <Typography id={'menuheading'}><RateReviewOutlinedIcon className={'menuicon'} />Feedback</Typography>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon className='feedbackmenuicn' />} aria-controls="panel2a-content" id="panel2a-header"  >
+                  <Typography activeClassName={classes.active} id={'menuheading'}><RateReviewOutlinedIcon className={'menuicon'} />Feedback</Typography>
                 </ExpansionPanelSummary>
                 <Divider />
                 <ExpansionPanelDetails>
-                  <MenuItemLink id={'submenulinks'} to="/Feedback" primaryText="Employee" leftIcon={<PeopleAltOutlinedIcon className={'icon'} />} onClick={onMenuClick} > </MenuItemLink>
+                  <MenuItemLink className={classes.root} activeClassName={classes.active} id={'submenulinks'} to="/Feedback" primaryText="Employee" leftIcon={<PeopleAltOutlinedIcon className={'icon'} />} onClick={onMenuClick} > </MenuItemLink>
                 </ExpansionPanelDetails>
                 <Divider />
                 <ExpansionPanelDetails>
-                  <MenuItemLink id={'submenulinks'} to="/Feedbacktocompany" primaryText="Company" leftIcon={<BusinessOutlinedIcon className={'icon'} />} onClick={onMenuClick} />
+                  <MenuItemLink className={classes.root} activeClassName={classes.active} className={classes.root} id={'submenulinks'} to="/Feedbacktocompany" primaryText="Company" leftIcon={<BusinessOutlinedIcon className={'icon'} />} onClick={onMenuClick} />
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             </div>}

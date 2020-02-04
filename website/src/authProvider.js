@@ -23,13 +23,13 @@ export default (type, params) => {
       })
       .then((data) => {
         if (data.user.role.name === "Administrator") {
-          window.location.replace("/Topemplist");
+          window.location.replace("/users");
         }
         if (data.user.role.name === "Authenticated") {
-          window.location.replace("/");
+          window.location.replace("/dashboard");
         }
         if (data.user.role.name === "Public") {
-          window.location.replace("/");
+          window.location.replace("/dashboard");
         }
         localStorage.setItem('loggeduserreportid', data.user.reporter_name);
         localStorage.setItem('username', data.user.username);

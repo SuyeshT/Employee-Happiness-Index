@@ -12,23 +12,7 @@ export default class Average extends React.Component {
     var token = localStorage.getItem("jwt");
     var decode = decodeJwt(token);
     axios.get(constant.API + '/opinions?rater_id=' + decode.id + '/').then(res => {
-      var arr = [];
-      var key;
-      var count = 0;
-      res.data.forEach(function (obj) {
-        if (count == 0) {
-          for (key in obj.rating) {
-            arr.push(key);
-          }
-          count += 1;
-        } else {
-          for (key in obj.rating) {
-            if (!arr.includes(key)) {
-              arr.push(key);
-            }
-          }
-        }
-      });
+
       var today = new Date();
       var currentMonth;
       var minDate;
@@ -44,6 +28,32 @@ export default class Average extends React.Component {
       } else {
         maxDate = today.getFullYear() + '-' + (today.getMonth() + 2) + '-01';
       }
+
+      var arr = [];
+      var key;
+      var count = 0;
+
+      res.data.forEach(function (obj) {
+
+        if (obj.updated_at >= minDate && obj.updated_at < maxDate) {
+
+          if (count == 0) {
+            for (key in obj.rating) {
+              arr.push(key);
+              console.log("arra", arr);
+            }
+            count += 1;
+          } else {
+            for (key in obj.rating) {
+              if (!arr.includes(key)) {
+                arr.push(key);
+                console.log("a", arr);
+              }
+            }
+          }
+        }
+      });
+
       var update_date = [];
       var avg = [];
       var monthObjectArray = [];

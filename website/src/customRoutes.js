@@ -5,6 +5,7 @@ import Feedback from './Feedback';
 import Userfeedback from './userfeedback';
 import Empinfo from './userinfo';
 import Feedbacktocompany from './Feedbacktocompany';
+import Topemplist from './Topemplist';
 import { View } from "./View";
 export default [
   <div>
@@ -13,6 +14,7 @@ export default [
     <Route exact path="/Userfeedback" component={Userfeedback} />,
     <Route exact path="/userinfo" component={Empinfo} />,
     <Route exact path="/Feedbacktocompany" component={Feedbacktocompany} />,
-     {/* <Route exact path="/View" component={View} />, */}
+    <Route exact path="/Topemplist" component={Topemplist} />,
+     <Route exact path="/View" component={View} />,
   </div>
 ];

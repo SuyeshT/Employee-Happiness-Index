@@ -6,7 +6,7 @@ export const EmpdesignationsAPI = API+'/empdesignations';
 export const VishalAPI = 'http://192.168.2.87:1337';
 export const VishalKeywordAPI = VishalAPI+'/keywords';
 export const ls = localStorage.getItem('user_designation_id');
-export const empdesignationid = 'http://192.168.2.87:1337/empdesignations?id='+ls+'/';
+export const empdesignationid = 'http://192.168.2.87:1337/empdesignations?id=';
 export const sort = '?_sort=id:ASC';
 export const id= '?id=';
 export const designation = '?designation=';

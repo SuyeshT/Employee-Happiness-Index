@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import CardHeader from '@material-ui/core/CardHeader';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { Pagination, List } from 'react-admin';
 import * as constant from './constant';
 
@@ -16,6 +15,7 @@ export class Topemplist extends Component {
   constructor() {
     super();
     this.state = {
+      finalData2:[],
     };
   }
   componentDidMount() {
@@ -70,7 +70,6 @@ export class Topemplist extends Component {
             console.log("update",res.data[j].updated_at);
           for(var i=0;i<arr.length;i++){
             if (update_date[i] >= minDate && update_date[i] < maxDate) {
-            //Compare Date Here
             if(res.data[j].rating[arr[i]] != undefined){
             sum =sum +1;
             sumrating = sumrating + res.data[j].rating[arr[i]];
@@ -85,11 +84,10 @@ export class Topemplist extends Component {
         this.object1.sort((a, b) => (a.average < b.average) ? 1 : -1);
         this.topfiveRes = this.object1;
         var arr = [];
-        for(let m=0; m < 5; m++) {
-          // console.log('this.result name ',  this.topfiveRes[m]);
-          arr.push(this.topfiveRes[m]);
-        }
-        this.finalData = arr;
+        console.log("hi ",arr);
+        arr = this.object1.slice(0, 5);
+        this.setState({finalData2:arr});
+        console.log('datttaaagfrdsgrd -- ',this.state.finalData2);
         });
       }  
     });
@@ -99,10 +97,10 @@ export class Topemplist extends Component {
     console.log('datttaaa -- ',this.finalData);
     return (
       <React.Fragment>
-        <div className='commentsSectionbox' pagination={<PostPagination />}>
-          <center><CardHeader style={{ color: 'black' }} title={'Top Employees of this month.!'} /></center>
-        {this.finalData.map(Final =>
-          <div className='commcard'><p style={{ fontSize: 25, textTransform: 'capitalize' }}>{Final.name}</p><p>Rating :-  <span style={{ fontSize: 18 }}>  {Final.average}</span> </p></div>
+        <div className='chartSection' pagination={<PostPagination />}>
+        <center><p className='heading'>Top employees of this month.!</p></center>
+        {this.state.finalData2.map(Final =>
+          <div className='commcard'><p style={{ fontSize: 25, textTransform: 'capitalize' }}>{Final.name}</p><p style={{ fontSize: 18 }} >Rating: <span >  {Final.average}</span> </p></div>
         )}
         </div>
       </React.Fragment>

@@ -2,7 +2,6 @@ import React from 'react';
 import { Login, LoginForm } from 'react-admin';
 import { withStyles } from '@material-ui/core';
 const styles = theme =>({
-
     main: { background: '#ffffff' },
     avatar: {
         backgroundRepeat: 'no-repeat',

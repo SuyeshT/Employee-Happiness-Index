@@ -5,6 +5,7 @@
 
 p {
   font-family: 'Crimson Text', serif;
+  cursor: default;
 }
 
 a {
@@ -21,9 +22,12 @@ a {
 }
 
 .heading {
+  cursor: default;
   text-align: center;
-  font-size: 26px;
+  font-size: 30px;
   font-family: 'Crimson Text', serif;
+  color: black;
+  margin-top: -30px;
 }
 
 .MuiListItemIcon-root {
@@ -41,7 +45,14 @@ a {
   float: right;
   text-align: right;
   position: relative;
-  margin-right: -30px;
+  margin-right: -180px;
+}
+#uferrorm{
+  color: red;
+  float: right;
+  text-align: right;
+  position: relative;
+  margin-right: 40px;
 }
 
 .adminpagetopheight {
@@ -49,7 +60,8 @@ a {
   margin-bottom: -90px;
 }
 
-.title{
+.title {
+  cursor: default;
   font-family: 'Crimson Text', serif;
 }
 
@@ -81,6 +93,7 @@ a {
   color: #fff;
   background-color: #0927AF;
   border-color: #007bff;
+  cursor: pointer;
   font-family: 'Crimson Text', serif;
 }
 
@@ -88,6 +101,7 @@ a {
 .btn-danger {
   color: #fff;
   background-color: #dc3545;
+  cursor: pointer;
   border-color: #dc3545;
   font-family: 'Crimson Text', serif;
 }
@@ -125,7 +139,7 @@ a {
 .chartSection {
   border: 2px solid rgb(153, 153, 153);
   padding: 80px 50px 50px 50px;
-  margin-top: -50px;
+  margin-top: -60px;
   height: max-content;
   background-color: rgba(241, 252, 252,0.5);
 }
@@ -251,7 +265,7 @@ a {
 
 #forgotpassword{
   margin-top: 355px;
-  margin-left: -270px;
+  margin-left: -220px;
   margin-right: 25px;
   font-family: 'Crimson Text', serif;
   position: relative;
@@ -259,9 +273,6 @@ a {
 
 #loading{
   font-family: 'Crimson Text', serif;
-  /* position: absolute; */
-  /* right: 50px;
-  top: 10px; */
 }
 
 .profilebutton{
@@ -277,6 +288,7 @@ a {
 .profilepicture {
   width: 250px;
   border-radius: 50%;
+  height: 250px;
   border: 2px solid rgb(121, 121, 121);
   padding: 5px;
 }
@@ -313,21 +325,18 @@ a {
 
 .submenu {
   display: flex;
-  padding-right: 10px;
+  padding-right: 0px;
 }
 
 #submenulinks {
-  display: flex;
-  padding: 20px 40px 20px 20px;
+  padding: 20px;
   font-family: 'Crimson Text', serif;
-  margin: -3px 17px -20px -5px;
+  margin: 0px 12px -15px 0px;
   font-size: 18px;
-  color: black;
 }
 
-#submenulinks:focus {
-  background: #98317D;
-  color: white;
+.feedbackmenuicn{
+  margin: 0px 15px 0px 0px;
 }
 
 .icon {
@@ -339,7 +348,7 @@ a {
 }
 
 #menuheading {
-  padding: 15px;
+  padding: 15px 0px 15px 15px;
   font-size: 18px;
   font-family: 'Crimson Text', serif;
   color: black;
@@ -354,18 +363,11 @@ a {
   font-family: 'Crimson Text', serif;
   margin: 5px 0px 5px 0px;
   font-size: 18px;
-  color: black;
-}
-
-#Menuitems:focus {
-  background-color: #98317D;
-  color: white;
 }
 
 .drawer {
   position: relative;
 }
-
 
 /*******************************************/
 /*FEEDBACK STYLING*/
@@ -410,10 +412,13 @@ a {
   margin-top: -15px;
 }
 
+.feedback{
+  margin-top: 15px;
+}
+
 .feedbackhead {
   float: right;
   font-size: 25px;
-  margin-right: 15px;
   text-decoration: none;
   font-family: 'Crimson Text', serif;
   padding: 5px;
@@ -436,6 +441,7 @@ a {
 }
 
 .ratingalignment {
+  cursor: default;
   padding: 25px;
   align-content: center;
   font-size: 18px;
@@ -496,17 +502,6 @@ a {
 /*******************************************/
 /* Comments to Company */
 /*******************************************/
-.commentsSectionbox {
-  background-color: rgba(241, 252, 252,0.5);
-  border: 2px solid rgb(153, 153, 153);
-  padding: 50px 50px 50px 50px;
-  margin: -70px 0px -500px 0px;
-  display: flexbox;
-  height: max-content;
-  flex-wrap: wrap;
-  align-content: center;
-}
-
 .commcard{
   padding: 20px;
   word-wrap: break-word;
@@ -519,6 +514,7 @@ a {
   background-color: white;
   position:relative;
 }
+
 .commentscard {
   text-transform: capitalize;
   font-size: 22px;
@@ -565,7 +561,83 @@ p.commentscard:after {
 
 .ratingButton {
   float: right;
-  margin: 25px 40px 10px 0px;
+  margin: 25px 30px 10px 0px;
+}
+
+.dialog-msg{
+  font-family: 'Crimson Text', serif;
+}
+
+#changepassword:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 50px;
 }
 
 
+.main-nav-active{
+  background-color: yellow;
+}
+
+
+
+/*******************************************/
+/* Pagination */
+/*******************************************/
+
+.current-page {
+  margin-top:14px;
+  padding-right:20px;
+  float:right;
+  font-size: 0.9rem;
+  vertical-align: middle; }
+
+.country-card-container {
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden; }
+
+.country-name {
+  font-size: 0.9rem; }
+
+.country-region {
+  font-size: 0.7rem; }
+
+.current-page,
+.country-name,
+.country-region {
+  line-height: 1; }
+
+/* Override some Bootstrap pagination styles */
+ul.pagination {
+  margin-top: 40px;
+  margin-bottom: 0;
+  float:right;
+  margin-right:-70px ;
+  list-style-type:none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+  ul.pagination li{
+    display:inline;
+  }
+  ul.pagination li.page-item.active a.page-link {
+    color: #445565 !important;
+    background-color: #e2e7ec !important;
+    float:left;
+    list-style-type:none;
+    border-color: #a5aaaf !important; }
+  ul.pagination a.page-link {
+    padding: 0.75rem 1rem;
+    min-width: 3.5rem;
+    text-align: center;
+    float:left;
+    list-style-type:none;
+    box-shadow: none !important;
+    border-color: #afb6bd !important;
+    color: #6b88a4;
+    font-weight: 900;
+    font-size: 1rem; }
+    ul.pagination a.page-link:hover {
+     
+      list-style-type:none;
+      background-color: #f4f4f4; }
